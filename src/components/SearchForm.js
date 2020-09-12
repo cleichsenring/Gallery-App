@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom'
 
 
-export default class SearchForm extends Component {
+class SearchForm extends Component {
 
   state = {
     searchText: ''
@@ -14,8 +15,13 @@ export default class SearchForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
     this.props.onSearch(this.query.value, true);
-    e.currentTarget.reset();
+    
+    // Update router path and history.
+    // withRouter explanation from StackOverflow https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
+    let path = `/search/${this.state.searchText}`;
+    this.props.history.push(path)
 
+    e.currentTarget.reset();
   }
 
   render() {
@@ -37,3 +43,5 @@ export default class SearchForm extends Component {
     );
   }
 }
+
+export default withRouter(SearchForm);
