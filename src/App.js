@@ -1,28 +1,42 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
+//Config import
+import apiKey from './config';
 
 //App component
 import SearchForm from './components/SearchForm'
 import Nav from './components/Nav';
+import PhotoContainer from './components/PhotoContainer';
 
 class App extends Component {
 
   constructor() {
     super();
     this.state = {
-
+      mountains: [],
+      headphones: [],
+      robots: [],
+      userSearch: []
     }
   }
   
   componentDidMount() {
-
+    this.imageSearch('mountains');
+    this.imageSearch('headphones')
+    this.imageSearch('robots');
   }
 
+// 2nd param optional. Used to store searches in same state "userSearch"
+  imageSearch = (query, userSearch) => {
+    fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
+      .then(response => response.json())
+      .then(responseData => {
+        userSearch ? this.setState({ userSearch: responseData.photos.photo })
+         : this.setState({ [query]: responseData.photos.photo })
+      })
+      .catch(err => console.log('Error fetching data', err))
 
-  imageSearch = (query) => {
-    //TODO FETCH
-    console.log('Searched for ... ', query);
   }
 
   
@@ -33,10 +47,11 @@ class App extends Component {
           <SearchForm onSearch={this.imageSearch}/>
           <Nav />
           <Switch>
-            <Route exact path="/" render={() => <Redirect to="/spaceship"/>}/>
-            <Route path="/spaceship" render={() => null }/>
-            <Route path="/" render={() => null }/>
-            <Route path="/" render={() => null }/>
+            <Route exact path="/" render={() => <Redirect to="/mountains"/>}/>
+            <Route path="/mountains" render={() => <PhotoContainer data={this.state.mountains} /> }/>
+            <Route path="/headphones" render={() => <PhotoContainer data={this.state.headphones} /> }/>
+            <Route path="/robots" render={() => <PhotoContainer data={this.state.robots} /> }/>
+            <Route exact path="/search/:query" render={() => <PhotoContainer data={this.state.userSearch} />} />
           </Switch>
         </div>
       </BrowserRouter>
