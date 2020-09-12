@@ -32,8 +32,7 @@ class App extends Component {
     fetch(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => response.json())
       .then(responseData => {
-        userSearch ? this.setState({ userSearch: responseData.photos.photo })
-         : this.setState({ [query]: responseData.photos.photo })
+        userSearch ? this.setState({ userSearch: responseData.photos.photo }) : this.setState({ [query]: responseData.photos.photo })
       })
       .catch(err => console.log('Error fetching data', err))
 
