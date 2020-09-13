@@ -7,6 +7,11 @@ import ImageNotFound from './ImageNotFound';
 const PhotoContainer = props => {
   const results = props.data;
   let photos;
+  if(props.loading) {
+    return (
+      <h2>Loading.....</h2>
+    );
+  }
   if( results.length > 0 ) {
     photos = results.map(photo => 
       <Photo 
