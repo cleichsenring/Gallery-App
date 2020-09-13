@@ -8,6 +8,7 @@ import apiKey from './config';
 import SearchForm from './components/SearchForm'
 import Nav from './components/Nav';
 import PhotoContainer from './components/PhotoContainer';
+import NotFound from './components/NotFound'; 
 
 class App extends Component {
 
@@ -51,6 +52,7 @@ class App extends Component {
             <Route path="/headphones" render={() => <PhotoContainer data={this.state.headphones} /> }/>
             <Route path="/robots" render={() => <PhotoContainer data={this.state.robots} /> }/>
             <Route exact path="/search/:query" render={() => <PhotoContainer data={this.state.userSearch} />} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </BrowserRouter>

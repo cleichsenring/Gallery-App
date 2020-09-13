@@ -7,7 +7,7 @@ import ImageNotFound from './ImageNotFound';
 const PhotoContainer = props => {
   const results = props.data;
   let photos;
-  if( results ) {
+  if( results.length > 0 ) {
     photos = results.map(photo => 
       <Photo 
         farm={photo.farm} 
@@ -18,7 +18,8 @@ const PhotoContainer = props => {
         key={photo.id} 
       />
     );
-  } else(
+    document.title = props.title
+  } else (
     photos = <ImageNotFound />
   )
 
