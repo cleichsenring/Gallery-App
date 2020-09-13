@@ -4,14 +4,20 @@ import React from 'react';
 import Photo from './Photo';
 import ImageNotFound from './ImageNotFound';
 
-const PhotoContainer = props => {
-  const results = props.data;
+// Destructuring needed props
+const PhotoContainer = ({data, loading}) => {
+  const results = data;
   let photos;
-  if(props.loading) {
+ 
+
+  //Loading indicator. Only shown while data is being fetched
+  if( loading ) {
     return (
       <h2>Loading.....</h2>
     );
   }
+
+  //Check if search returned any data and map over results
   if( results.length > 0 ) {
     photos = results.map(photo => 
       <Photo 
@@ -23,7 +29,6 @@ const PhotoContainer = props => {
         key={photo.id} 
       />
     );
-    document.title = props.title
   } else (
     photos = <ImageNotFound />
   )

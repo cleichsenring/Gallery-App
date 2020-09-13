@@ -17,7 +17,7 @@ class SearchForm extends Component {
     this.props.onSearch(this.query.value, true);
     
     // Update router path and history.
-    // withRouter explanation from StackOverflow https://stackoverflow.com/questions/53539314/what-is-withrouter-for-in-react-router-dom
+    // withRouter explanation from StackOverflow https://stackoverflow.com/questions/43107912/how-to-access-history-object-in-new-react-router-v4
     let path = `/search/${this.state.searchText}`;
     this.props.history.push(path)
 
