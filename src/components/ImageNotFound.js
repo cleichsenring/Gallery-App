@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const ImageNotFound = () => (
   <li className="not-found">
     <h3>No Results Found</h3>
