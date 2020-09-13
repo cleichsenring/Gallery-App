@@ -1,3 +1,18 @@
+## Instructions
+Image gallery app created using React and a public API.
+Upon loading three image categories are stored into state. Use can navigate between choices using [React Router Dom](https://www.npmjs.com/package/react-router-dom). User can also choose their own search term. If a search returns no results a friendly user message is displayed.
+
+This project makes use of the [Flickr API](https://www.flickr.com/services/api/) `flickr.photos.search` endpoint.
+
+You will need to create a `config.js` file and place in the root directory. Config file should contain your private Flickr API key. If you need to create one go [here](https://www.flickr.com/services/apps/create/apply/) and apply for a *Non-Commercial* license.
+
+```
+const apiKey = 'YOUR API KEY';
+export default apiKey;
+```
+
+***
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
